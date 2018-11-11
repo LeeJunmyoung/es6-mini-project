@@ -27,12 +27,19 @@ class Blog {
     });
     blogList.addEventListener("click",({target})=>{
       const targetClassName = target.className;
+
       if(targetClassName==='like'){
         const title = target.previousElementSibling.textContent
         this.likedSet.add(title);
-        console.log(this.likedSet);
-      }else{
-        return;
+        target.className='unlike';
+
+        this.insertLikeList();
+      }else if(targetClassName==='unlike'){
+        const title = target.previousElementSibling.textContent
+        target.className='like';
+        this.likedSet.delete(title);
+        this.insertLikeList();
+
       }
     });
   }
@@ -65,6 +72,16 @@ class Blog {
        </li>`;
 		})
 	}
+  insertLikeList(){
+    const ul = document.querySelector('.like-list > ul');
+    let likedSum = "";
+    this.likedSet.forEach((value)=>{
+      likedSum+=
+                    `<li>${value}
+                    </li>`;
+    });
+    ul.innerHTML = likedSum;
+  }
 }
 
 export default Blog;
