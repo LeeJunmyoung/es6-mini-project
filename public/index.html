@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MY Project</title>
+    <style>
+    .controller {
+      margin: 1rem;
+    }
+    .controller button.start {
+      width: 200px;
+      height: 50px;
+      font-size: 1.1rem;
+    }
+    .blogList {
+      overflow: hidden;
+    }
+    .blogList li {
+      display:block;
+      list-style: none;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      width: 120px;
+      height: 120px;
+      border: 1px solid gray;
+      float: left;
+      margin: 1em;
+      padding: 0.4em;
+      word-wrap: break-word;
+      position: relative;
+    }
+    .blogList a {
+      text-decoration: none;
+      color: #222;
+    }
+    .blogList a:hover {
+      color: gray;
+    }
+    .blogList .like {
+      cursor: pointer;
+      position: absolute;
+      bottom: 0;
+      color: #3f87ca;
+    }
+
+    .blogList .unlike {
+      cursor: pointer;
+      position: absolute;
+      bottom: 0;
+      color: #d63838;
+    }
+    </style>
+  </head>
+  <body>
+    <section class="controller">
+        <button class="start">코드스쿼드 블로그 입니다</button>
+    </section>
+
+    <section class="blogList">
+        <ul></ul>
+    </section>
+
+    <section class="like-list">
+        <h4>내 찜 목록</h4>
+        <ul></ul>
+    </section>
+    <script src="./dist/bundle.js"></script>
+  </body>
+</html>
