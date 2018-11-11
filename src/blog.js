@@ -1,12 +1,44 @@
 class Blog {
 	constructor() {
 		//const dataURL = "https://tlhm20eugk.execute-api.ap-northeast-2.amazonaws.com/prod/lambda_get_blog_info";
-		const dataURL = "/data/data.json";
-		this.setInitData(dataURL);
+    this.setInitVariable();
+		this.registerEvents();
+    this.likedSet = new Set();
+    console.log(this.likedSet);
 	}
+  setInitVariable(){
+    this.blogList =  document.querySelector(".blogList > ul");
+  }
+
+
+  registerEvents(){
+    const dataURL = "/data/data.json";
+    const startBtn = document.querySelector(".start");
+    const blogList = this.blogList;
+    let count =0;
+
+
+
+    startBtn.addEventListener("click",()=>{
+      if(count==0){
+      this.setInitData(dataURL);
+      count++;
+      }
+    });
+    blogList.addEventListener("click",({target})=>{
+      const targetClassName = target.className;
+      if(targetClassName==='like'){
+        const title = target.previousElementSibling.textContent
+        this.likedSet.add(title);
+        console.log(this.likedSet);
+      }else{
+        return;
+      }
+    });
+  }
 
 	setInitData(dataURL) {
-		this.getData(dataURL, this.insertPosts);
+		this.getData(dataURL, this.insertPosts.bind(this));
 	}
 
 	getData(dataURL, fn) {
@@ -24,9 +56,13 @@ class Blog {
 	}
 
 	insertPosts(list) {
-		const ul = document.querySelector(".blogList > ul");
+	//	const ul = document.querySelector(".blogList > ul");
 		list.forEach((v) => {
-			ul.innerHTML += `<li> <a href=${v.link}> ${v.title} </a></li>`;
+			this.blogList.innerHTML +=
+      `<li>
+          <a href=${v.link}> ${v.title} </a>
+          <div class='like'>찜하기</div>
+       </li>`;
 		})
 	}
 }
